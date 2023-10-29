@@ -1,4 +1,5 @@
 import type { SimplePokemon, PokemonDetail, EvolutionChain, PokemonSpecies } from "./types"
+import { traverseEvolutionChain } from "./evolution";
 
 export const fetchPokemon = async (id: number): Promise<SimplePokemon> => {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, {cache: 'force-cache'});
@@ -28,7 +29,22 @@ export const fetchPokemonDetail = async(id: number): Promise<PokemonDetail> => {
             const evolutionResponse = await fetch(species.evolution_chain.url, { cache: 'force-cache' });
             const evolutionChain: EvolutionChain = await evolutionResponse.json();
 
-            return {...pokemon, evolution_chain: evolutionChain};
+            let speciesNames: string[] = [];
+            speciesNames.push(evolutionChain.chain.species.name);
+            await traverseEvolutionChain(evolutionChain.chain.evolves_to, speciesNames);
+            const popIndex = speciesNames.indexOf(pokemon.name);
+            if (popIndex != -1){
+                speciesNames.splice(popIndex, 1);
+            }
+
+            const evolutions = await Promise.all(
+                speciesNames.map(name => 
+                    fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {cache: 'force-cache'})
+                    .then(response => response.json())
+                )
+            );
+
+            return {...pokemon, evolution_chain: evolutions};
         }
     }
 
