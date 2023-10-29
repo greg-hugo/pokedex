@@ -44,7 +44,7 @@ export default function Page({ params }: { params: { id: number } }) {
             <Link href={'/'} className="pt-3 opacity-25 hover:opacity-100 w-16">
                 <span className="px-8">Home</span>
             </Link>
-            <div className="flex justify-between pl-8 pt-5">
+            <div className="flex justify-between px-8 pt-5">
                 <div>
                     <h1 className="mb-2 capitalize"> {pokemon?.name} </h1>
                     <div className="flex">
@@ -63,17 +63,17 @@ export default function Page({ params }: { params: { id: number } }) {
                     <h1 className="opacity-30"> {`#${String(pokemon?.id).padStart(3, '0')}`} </h1>
                 </div>
             </div>
-            <div className="relative">
+            <div className="relative h-36">
                 <div className="relative overflow-hidden h-36">
                     <div className='absolute -bottom-20 -right-10'>
                         <img src='/images/pokeball.svg' className='h-60 w-60 opacity-5' alt='Pokeball'/>
                     </div>
                 </div>
-                <div className="absolute -bottom-24 left-[38%] h-[50vh]">
+                <div className="absolute -bottom-16 sm:-bottom-24 xl:-bottom-16 left-1/2 transform -translate-x-1/2 h-[25vh] w-[25vh] xl:h-[40vh] xl:w-[40vh] flex justify-center items-end">
                     <img src={pokemon?.sprites.front_default} className='h-full w-full' alt='Pokemon'/>
                 </div>
             </div>
-            <div className="flex-grow bg-white rounded-tl-3xl rounded-tr-3xl pt-24 px-20">
+            <div className="flex-grow bg-white rounded-tl-3xl rounded-tr-3xl pt-24 px-8 lg:px-20">
                 <DetailNavbar 
                     menuItems={menuItems}
                     selectedItem={selectedItem}
