@@ -46,15 +46,15 @@ export type EvolutionStage = {
 }
 
 export type EvolutionChain = {
-    chain: EvolutionStage[];
+    chain: EvolutionStage;
 } 
 
 export type PokemonDetail = SimplePokemon & {
     height: number;
-    width: number;
+    weight: number;
     species: PokemonSpecies;
     abilities: PokemonAbility[];
     stats: PokemonStat[];
     moves: Move[];
-    evolution_chain?: EvolutionChain;
+    evolution_chain?: SimplePokemon[];
 }
