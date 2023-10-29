@@ -1,4 +1,4 @@
-import { type SimplePokemon, PokemonDetail, EvolutionChain } from "./types"
+import type { SimplePokemon, PokemonDetail, EvolutionChain, PokemonSpecies } from "./types"
 
 export const fetchPokemon = async (id: number): Promise<SimplePokemon> => {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, {cache: 'force-cache'});
@@ -20,11 +20,16 @@ export const fetchPokemonDetail = async(id: number): Promise<PokemonDetail> => {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, {cache: 'force-cache'});
     const pokemon: PokemonDetail = await response.json();
 
-    if (pokemon.species.evolution_chain){
-        const evolutionResponse = await fetch(pokemon.species.evolution_chain.url, { cache: 'force-cache' });
-        const evolutionChain: EvolutionChain = await evolutionResponse.json();
+    if (pokemon.species.url){
+        const speciesResponse = await fetch(pokemon.species.url, { cache: 'force-cache' });
+        const species: PokemonSpecies = await speciesResponse.json();
 
-        return { ...pokemon, evolution_chain: evolutionChain };
+        if (species.evolution_chain?.url){
+            const evolutionResponse = await fetch(species.evolution_chain.url, { cache: 'force-cache' });
+            const evolutionChain: EvolutionChain = await evolutionResponse.json();
+
+            return {...pokemon, evolution_chain: evolutionChain};
+        }
     }
 
     return pokemon;
