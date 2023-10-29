@@ -32,19 +32,20 @@ export const fetchPokemonDetail = async(id: number): Promise<PokemonDetail> => {
             let speciesNames: string[] = [];
             speciesNames.push(evolutionChain.chain.species.name);
             await traverseEvolutionChain(evolutionChain.chain.evolves_to, speciesNames);
-            const popIndex = speciesNames.indexOf(pokemon.name);
+            const popIndex = speciesNames.indexOf(pokemon.species.name);
             if (popIndex != -1){
                 speciesNames.splice(popIndex, 1);
             }
-
-            const evolutions = await Promise.all(
-                speciesNames.map(name => 
-                    fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {cache: 'force-cache'})
-                    .then(response => response.json())
-                )
-            );
-
-            return {...pokemon, evolution_chain: evolutions};
+            if (speciesNames.length !== 0){
+                const evolutions = await Promise.all(
+                    speciesNames.map(name => 
+                        fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {cache: 'force-cache'})
+                        .then(response => response.json())
+                    )
+                );
+                    
+                return {...pokemon, evolution_chain: evolutions};
+            }
         }
     }
 

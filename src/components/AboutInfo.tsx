@@ -10,7 +10,7 @@ interface AboutInfoProps {
 
 const AboutInfo = ({ species, height, weight, abilities }: AboutInfoProps) => {
     return (
-        <div className="bg-inherit w-1/2 grid grid-cols-2">
+        <div className="bg-inherit w-2/3 xl:w-1/2 grid grid-cols-2">
             <div className="text-gray-500 grid gap-2">
                 <p>Species</p>
                 <p>Height</p>
