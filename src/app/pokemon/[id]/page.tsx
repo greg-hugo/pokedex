@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect, useCallback } from "react"
-import type { PokemonDetail, EvolutionStage, SimplePokemonType } from "@/utils/types"
+import type { PokemonDetail, SimplePokemonType } from "@/utils/types"
 import { fetchPokemonDetail } from "@/utils/fetch";
 import { getTypeColor } from "@/utils/typecolor";
 import PokemonTypePill from "@/components/PokemonTypePill";
@@ -32,6 +32,10 @@ export default function Page({ params }: { params: { id: number } }) {
         void fetchData();
     }, [params.id]);
 
+    useEffect(() => {
+        console.log(pokemon);
+    }, [pokemon]);
+
     const getBackground = useCallback(() => {
         if (pokemon) {
             return getTypeColor(pokemon.types[0].type.name);
@@ -40,7 +44,7 @@ export default function Page({ params }: { params: { id: number } }) {
     }, [pokemon]);
 
     return (
-        <div className="h-screen flex flex-col" style={{ backgroundColor: `${getBackground()}` }}>
+        <div className="h-screen flex flex-col" style={{ backgroundColor: `${getBackground()}` }} data-testid="detail-page">
             <Link href={'/'} className="pt-3 opacity-25 hover:opacity-100 w-16">
                 <span className="px-8">Home</span>
             </Link>
