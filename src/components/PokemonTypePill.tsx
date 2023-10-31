@@ -5,7 +5,7 @@ interface PokemonTypePillProps {
 
 const PokemonTypePill = ({ type }: PokemonTypePillProps) => {
     return (
-        <button className="px-1 h-8 mb-1 bg-opacity-30 w-4/5 rounded-2xl bg-white" disabled>
+        <button className="px-1 h-8 mb-1 bg-opacity-30 w-4/5 rounded-2xl bg-white" disabled data-testid="pokemon-type-pill">
             <h5 className="capitalize">{ type }</h5>
         </button>
     )

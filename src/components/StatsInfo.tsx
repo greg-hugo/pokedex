@@ -7,7 +7,7 @@ interface StatsInfoProps {
 
 const StatsInfo = ({ stats }: StatsInfoProps) => {
     return (
-        <div className="bg-inherit w-full xl:w-2/3 grid grid-cols-4">
+        <div className="bg-inherit w-full xl:w-2/3 grid grid-cols-4" data-testid="stats-info">
             <div className="text-gray-500 grid gap-2">
                 <p>HP</p>
                 <p>Attack</p>

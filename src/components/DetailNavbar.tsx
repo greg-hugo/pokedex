@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useCallback } from "react"
 import NavbarButton from "./NavbarButton"
 
 interface DetailNavbarProps {
@@ -16,7 +16,7 @@ const DetailNavbar = ({ menuItems, selectedItem, setSelectedItem }: DetailNavbar
     }, [setSelectedItem]);
 
     return (
-        <div className="bg-inherit flex justify-between w-full mb-12">
+        <div className="bg-inherit flex justify-between w-full mb-12" data-testid="detail-navbar">
             {
                 menuItems.map((item: string) => (
                     <NavbarButton 
