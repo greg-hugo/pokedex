@@ -13,7 +13,7 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
 
     return (
         <Link href={`/pokemon/${pokemon.id}`}>
-            <div className="grid grid-cols-2 h-44 w-full rounded-xl border pl-4 pt-4 cursor-pointer hover:opacity-60" style={{ backgroundColor: `${getTypeColor(pokemon.types[0].type.name)}` }}>
+            <div className="grid grid-cols-2 h-44 w-full rounded-xl border pl-4 pt-4 cursor-pointer hover:opacity-60" style={{ backgroundColor: `${getTypeColor(pokemon.types[0].type.name)}` }} data-testid="pokemon-card">
                 <div className="flex flex-col space-y-1">
                     <h3 className="mb-2 capitalize"> {pokemon?.name} </h3>
                     {

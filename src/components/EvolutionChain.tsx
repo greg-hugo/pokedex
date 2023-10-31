@@ -7,7 +7,10 @@ interface EvolutionChainProps {
 
 const EvolutionChain = ({ pokemons }: EvolutionChainProps) => {
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 w-full gap-3">
+        <div 
+            className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 w-full gap-3"
+            data-testid="evolution-chain"
+        >
             {
                 pokemons?.map((pokemon: SimplePokemon, index: number) => {
                     return <PokemonCard pokemon={pokemon} key={index} />

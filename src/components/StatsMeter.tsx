@@ -11,7 +11,7 @@ const StatsMeter = ({ stat }: StatsMeterProps) => {
 
     return (
         <div className="flex items-center">
-            <div style={{ width: `${percentage}%`, backgroundColor: `${color}`, height: '10px' }}></div>
+            <div data-testid="stats-meter" style={{ width: `${percentage}%`, backgroundColor: `${color}`, height: '10px' }}></div>
         </div>
     )
 };
